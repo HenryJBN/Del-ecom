@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('email', 40);
             $table->longText('items');
             $table->string('receipt_url', 150)->nullable();
-            $table->longText('shipping_info');
+            $table->longText('shipping_info')->nullable();
             $table->enum('status', ['new', 'canceled', 'shipped', 'delivered', 'returned']);
             $table->unsignedInteger('quantity');
             $table->double('subtotal');
