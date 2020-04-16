@@ -1,5 +1,9 @@
 @extends('layouts.admin.auth')
 
+@section('title')
+Register
+@endsection
+
 @section('content')
 
 
@@ -14,12 +18,12 @@
             <h4 class="text-muted font-18 m-b-5 text-center">{{ __('Register') }}</h4>
             <p class="text-muted text-center">{{__('Get your free  account now.')}}</p>
 
-            
+
             <form class="form-horizontal m-t-30" method="POST" action="{{ route('register') }}">
                     @csrf
                 <div class="form-group">
                     <label for="name" >{{ __('Name') }}</label>
-                   
+
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
@@ -27,7 +31,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                   
+
                 </div>
 
                 <div class="form-group">
@@ -40,11 +44,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                         
+
                 </div>
 
                 <div class="form-group">
-                 
+
                     <label for="password" >{{ __('Password') }}</label>
 
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -54,15 +58,15 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                   
+
                 </div>
 
                 <div class="form-group">
-                 
+
                     <label for="password-confirm" >{{ __('Confirm Password') }}</label>
 
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                    
+
                 </div>
 
                 <div class="form-group row m-t-20">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\SubCategory;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,11 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['PageTitle'] = "All Categories";
+        $PageTitle = "All SubCategory";
+        $subcategories = SubCategory::orderBy('id', 'desc')->get();
+
+        return view('admin.subcategory.index', compact('subcategories', 'PageTitle'));
     }
 
     /**
@@ -24,7 +29,10 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['PageTitle'] = "Create Category";
+
+        $data['categories'] = Category::orderBy('id','DESC')->pluck('name','name')->all();
+        return view('admin.subcategory.create', $data);
     }
 
     /**

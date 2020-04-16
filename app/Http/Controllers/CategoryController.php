@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['PageTitle'] = "All Categories";
+        $PageTitle = "All Cat";
+        $categories = Category::orderBy('id', 'desc')->get();
+
+        return view('admin.category.index', compact('categories', 'PageTitle'));
     }
 
     /**
@@ -24,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['PageTitle'] = "Create Category";
+
+        return view('admin.category.create', $data);
     }
 
     /**
@@ -35,7 +42,40 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //--- Validation Section
+        $rules = [
+            'name' => 'required',
+            'description' => 'required',
+            'upload' => 'mimes:jpeg,jpg,png,svg',
+            'slug' => 'unique:categories|regex:/^[a-zA-Z0-9\s-]+$/',
+        ];
+        $customs = [
+            'upload.mimes' => 'Icon Type is Invalid.',
+            'slug.unique' => 'This slug has already been taken.',
+            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $customs);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)->withInput();
+        }
+        //--- Validation Section Ends
+
+        //Logic
+
+        $category = Category::create([
+            'name' => $request->name,
+            'slug' => Category::str_slug($request->name),
+            'description' => $request->description,
+        ]);
+// ADDING IMAGE TO MEDIA TABLE
+        $category
+            ->addMedia($request->upload)
+            ->toMediaCollection('category');
+
+        return redirect()->route('admin-cat-index')
+            ->with('success', 'New Category Added Successfully.');
     }
 
     /**
@@ -55,9 +95,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $data['category'] = Category::findOrFail($id);
+        $data['PageTitle'] = 'Edit ' . $data['category']->name;
+        return view('admin.category.edit', $data);
     }
 
     /**
@@ -67,9 +109,45 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        // dd($request['upload']);
+        //--- Validation Section
+        $rules = [
+            'name' => 'required',
+            'slug' => 'unique:categories,slug,' . $id . '|regex:/^[a-zA-Z0-9\s-]+$/',
+        ];
+        $customs = [
+
+            'slug.unique' => 'This slug has already been taken.',
+            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $customs);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)->withInput();
+        }
+        //--- Validation Section Ends
+
+        //--- Logic Section
+        $category = Category::findOrFail($id);
+
+        $category->name = $request->name;
+        $category->slug = $request->slug;
+        $category->description = $request->description;
+        $category->update();
+
+
+             if ($request->upload != null) {
+                $category->clearMediaCollection('category');
+                $category
+                ->addMedia($request->upload)
+                ->toMediaCollection('category');
+             }
+
+        return redirect()->route('admin-cat-index')
+            ->with('success', 'Category Updated Successfully.');
     }
 
     /**
@@ -78,8 +156,13 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request)
     {
-        //
+        $category = Category::findOrFail($request->id);
+        $category->clearMediaCollection('category');
+        $category->delete();
+        //--- Redirect Section
+
+        return response("success", 200);
     }
 }

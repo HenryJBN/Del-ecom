@@ -1,5 +1,9 @@
 @extends('layouts.admin.auth')
 
+@section('title')
+Login
+@endsection
+
 @section('content')
 
 
@@ -7,7 +11,7 @@
     <div class="card-body">
 
         <h3 class="text-center m-0">
-            <a href="index.html" class="logo logo-admin"><img src="assets/images/logo.png" height="30" alt="logo"></a>
+            <a href="/" class="logo logo-admin"><img src="assets/images/logo.png" height="30" alt="logo"></a>
         </h3>
 
         <div class="p-3">
@@ -27,7 +31,7 @@
                                 @enderror
                 </div>
 
-               
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -55,11 +59,11 @@
                 <div class="form-group m-t-10 mb-0 row">
                     <div class="col-12 m-t-20">
                         @if (Route::has('password.request'))
-                        
+
                         <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock"></i>  {{ __('Forgot Your Password?') }}</a>
                     @endif
 
-                       
+
                     </div>
                 </div>
             </form>
@@ -70,11 +74,11 @@
 
 <div class="m-t-40 text-center">
     @if (Route::has('register'))
-                                
+
         <p class="text-white-50">Don't have an account ? <a href="{{ route('register') }}" class="text-white">{{ __('Register') }}</a> </p>
           @endif
-   
-    <p class="text-muted">© 2018 Del-York. Crafted with <i class="mdi mdi-heart text-danger"></i> by Donsoft</p>
+
+    <p class="text-muted">© 2020 Del-York. Crafted with <i class="mdi mdi-heart text-danger"></i> by Donsoft</p>
 </div>
 
 @endsection

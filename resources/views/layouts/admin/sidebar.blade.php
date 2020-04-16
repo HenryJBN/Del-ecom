@@ -10,6 +10,34 @@
         </li>
 
         <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-group"></i><span> User <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+                <li><a href="{{ route('users.create') }}">Add</a></li>
+                <li><a href="{{ route('users') }}">Staff</a></li>
+                <li><a href="{{ route('users') }}/customer">Customer</a></li>
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-reproduction"></i><span> Role <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+                <li><a href="{{ route('roles.create') }}">Create Role</a></li>
+                <li><a href="{{ route('roles.index') }}">All Roles</a></li>
+            </ul>
+        </li>
+
+
+        <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-view-module"></i><span> Category <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+
+                <li><a href="{{ route('admin-cat-index') }}">Main Categories</a></li>
+                <li><a href="{{ route('admin-subcat-index') }}">Sub Categories</a></li>
+            </ul>
+        </li>
+
+        <li>
             <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-email"></i><span> Email <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
             <ul class="submenu">
                 <li><a href="email-inbox.html">Inbox</a></li>
