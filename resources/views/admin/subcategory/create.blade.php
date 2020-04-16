@@ -70,7 +70,13 @@
                                         <div class="col-xs-8 col-sm-8 col-md-8">
                                             <div class="form-group">
                                                 <strong>Category:</strong>
-                                                {!! Form::select('category_id',$categories, null, ['placeholder' => 'Pick a Category...','class' => 'form-control',]); !!}
+                                                <select  name="category_id" class="form-control" required>
+                                                    <option value="">{{ __("Select Category") }}</option>
+                                                      @foreach($categories as $cat)
+                                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                                      @endforeach
+                                                  </select>
+                                                {{-- {!! Form::select('category_id',$categories, null, ['placeholder' => 'Pick a Category...','class' => 'form-control','required']); !!} --}}
                                             </div>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8">
@@ -117,7 +123,7 @@
 
 
                                         <div class="col-xs-8 col-sm-8 col-md-8 text-center">
-                                            <button type="submit" class="btn btn-primary">{{ __('Create Category') }}</button>
+                                            <button type="submit" class="btn btn-primary">{{ __('Create SubCategory') }}</button>
                                         </div>
                                     </div>
                                     {!! Form::close() !!}

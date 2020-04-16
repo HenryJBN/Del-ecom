@@ -3,9 +3,9 @@
     <tr>
         <th>No</th>
         <th>Category</th>
+        <th>Name</th>
         <th>Slug</th>
         <th>Photo</th>
-        <th>No of Product</th>
         <th width="280px">Action</th>
 
     </tr>
@@ -18,11 +18,11 @@
         @foreach ($subcategories as $subcategory)
   <tr>
         <td>{{ ++$i }}</td>
+        <td>{{$subcategory->category->name}}</td>
         <td>{{$subcategory['name']}}</td>
         <td>{{$subcategory['slug']}}</td>
-        <td>{{$subcategory['slug']}}</td>
         <td><img height="50" width="50" src="{{$subcategory->getFirstMediaUrl('subcategory')}}" />   </td>
-        <td>{{$subcategory['created_at']}}</td>
+        
         <td>
 
             @can('sub_category-edit')
