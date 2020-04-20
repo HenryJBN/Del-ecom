@@ -30,7 +30,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $data['PageTitle'] = "Create Category";
+        $data['PageTitle'] = "Create SubCategory";
 
         $data['categories'] = Category::all();
         return view('admin.subcategory.create', $data);
@@ -44,29 +44,29 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         //--- Validation Section
         $rules = [
-            'slug' => 'unique:sub_categories|regex:/^[a-zA-Z0-9\s-]+$/'
-                 ];
+            'slug' => 'unique:sub_categories|regex:/^[a-zA-Z0-9\s-]+$/',
+        ];
         $customs = [
             'slug.unique' => 'This slug has already been taken.',
-            'slug.regex' => 'Slug Must Not Have Any Special Characters.'
-                   ];
+            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+        ];
         $validator = Validator::make($request->all(), $rules, $customs);
 
         if ($validator->fails()) {
             return back()
-            ->withErrors($validator)->withInput();
-            }
+                ->withErrors($validator)->withInput();
+        }
         //--- Validation Section Ends
 
         //Logic
 
-
         $subcategory = SubCategory::create([
             'category_id' => $request->category_id,
             'name' => $request->name,
-            'slug' => Category::str_slug($request->name),
+            'slug' => Category::str_slug($request->slug),
             'description' => $request->description,
         ]);
 // ADDING IMAGE TO MEDIA TABLE
@@ -74,11 +74,11 @@ class SubCategoryController extends Controller
             ->addMedia($request->upload)
             ->toMediaCollection('subcategory');
 
-         //--- Redirect Section
+        //--- Redirect Section
 
-         return redirect()->route('admin-subcat-index')
-         ->with('success', 'New SubCategory Added Successfully.');
-         //--- Redirect Section Ends
+        return redirect()->route('admin-subcat-index')
+            ->with('success', 'New SubCategory Added Successfully.');
+        //--- Redirect Section Ends
     }
 
     /**
@@ -98,9 +98,14 @@ class SubCategoryController extends Controller
      * @param  \App\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubCategory $subCategory)
+    public function edit($id)
     {
-        //
+
+        $data['PageTitle'] = "Create SubCategory";
+        $data['category'] = Category::all();
+        $data['subcategory'] = Subcategory::findOrFail($id);
+
+        return view('admin.subcategory.edit', $data);
     }
 
     /**
@@ -110,9 +115,46 @@ class SubCategoryController extends Controller
      * @param  \App\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, $id)
     {
-        //
+        //--- Validation Section
+        $rules = [
+            'name' => 'required',
+            'slug' => 'unique:categories,slug,' . $id . '|regex:/^[a-zA-Z0-9\s-]+$/',
+        ];
+        $customs = [
+
+            'slug.unique' => 'This slug has already been taken.',
+            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $customs);
+
+        if ($validator->fails()) {
+
+            return back()
+                ->withErrors($validator)->withInput();
+
+        }
+        //--- Validation Section Ends
+
+        //--- Logic Section
+        $subcategory = SubCategory::findOrFail($id);
+
+        $subcategory->category_id = $request->category_id;
+        $subcategory->name = $request->name;
+        $subcategory->slug = $request->slug;
+        $subcategory->description = $request->description;
+        $subcategory->update();
+
+        if ($request->upload != null) {
+            $subcategory->clearMediaCollection('subcategory');
+            $subcategory
+                ->addMedia($request->upload)
+                ->toMediaCollection('subcategory');
+        }
+
+        return redirect()->route('admin-subcat-index')
+            ->with('success', 'SubCategory Updated Successfully.');
     }
 
     /**
@@ -121,8 +163,28 @@ class SubCategoryController extends Controller
      * @param  \App\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(Request $request)
     {
-        //
+
+        $subcategory = SubCategory::findOrFail($request->id);
+        $subcategory->clearMediaCollection('subcategory');
+        $subcategory->delete();
+        //--- Redirect Section
+
+        $msg = 'SubCategory deleted Successfully !';
+        return response()->json(array(
+            'success' => true,
+            'data' => $msg,
+        ));
+
     }
+
+    //*** GET Request
+    public function load($id)
+    {
+    $data['cat'] = SubCategory::where('category_id',$id)->get();
+        echo json_encode($data);
+        //return view('product.subCat', compact('cat'));
+    }
+
 }

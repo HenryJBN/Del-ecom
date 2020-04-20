@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data['PageTitle'] = "All Categories";
-        $PageTitle = "All Cat";
+        
+        $PageTitle  = "All Categories";
         $categories = Category::orderBy('id', 'desc')->get();
 
         return view('admin.category.index', compact('categories', 'PageTitle'));
@@ -159,10 +159,28 @@ class CategoryController extends Controller
     public function destroy(Request $request)
     {
         $category = Category::findOrFail($request->id);
-        $category->clearMediaCollection('category');
-        $category->delete();
+        if($category->subCategories->count()>0)
+        {
+        //--- Redirect Section
+        $msg = 'Remove the subcategories first !';
+        return response()->json(array(
+            'success' => false,
+            'data'   => $msg
+        ));
+
+        //--- Redirect Section Ends
+        }
+
+
+       $category->clearMediaCollection('category');
+       $category->delete();
         //--- Redirect Section
 
-        return response("success", 200);
+        $msg = 'Category deleted Successfully !';
+        return response()->json(array(
+            'success' => true,
+            'data'   => $msg
+        ));
+
     }
 }

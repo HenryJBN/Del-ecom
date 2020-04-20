@@ -10,7 +10,7 @@
     "use strict";
 
     var AdvancedForm = function() {};
-    
+
     AdvancedForm.prototype.init = function() {
         //creating various controls
 
@@ -133,16 +133,16 @@
             buttondown_class: 'btn btn-primary',
             buttonup_class: 'btn btn-primary'
         });
-        $("input[name='demo2']").TouchSpin({
+        $("input[name='price']").TouchSpin({
             min: -1000000000,
             max: 1000000000,
             stepinterval: 50,
             maxboostedstep: 10000000,
-            prefix: '$',
+            prefix: '&#8358',
             buttondown_class: 'btn btn-primary',
             buttonup_class: 'btn btn-primary'
         });
-        $("input[name='demo3']").TouchSpin({
+        $("input[name='quantity']").TouchSpin({
             buttondown_class: 'btn btn-primary',
             buttonup_class: 'btn btn-primary'
         });

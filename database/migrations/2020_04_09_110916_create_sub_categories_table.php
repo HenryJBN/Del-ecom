@@ -20,7 +20,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('name', 200);
             $table->string('slug', 255);
             $table->text('description')->nullable();
-            $table->string('image_url')->nullable();
+           
             $table->timestamps();
         });
     }

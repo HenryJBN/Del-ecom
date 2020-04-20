@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('category_id')->nullable(true);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('subcategory_id')->nullable(true);
+            $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('sku', 10);
             $table->string('name', 190)->unique();
             $table->string('slug', 200);
@@ -26,13 +28,11 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->unsignedInteger('quantity');
             $table->double('weight')->nullable();
-            $table->enum('status', ['']);
+            $table->enum('status', ['draft','new','available','unavailable']);
             $table->string('color', 100);
             $table->unsignedInteger('size')->nullable('true');
             $table->string('model')->nullable();
             $table->string('brand')->nullable();
-            $table->unsignedBigInteger('media_id');
-            $table->string('feature_image', 150);
             $table->timestamps();
         });
     }
