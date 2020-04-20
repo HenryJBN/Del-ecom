@@ -13,11 +13,26 @@
 
 <script>
 
+var errorss = <?php echo json_encode($errors->all()); ?>
+
+let mat  =  errorss.toString().split(",").join("<br />");
+ console.log( errorss.toString());
+
+
+
+
     Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: JSON.stringify({!! $errors !!}),
-    footer: '<a href>Why do I have this issue?</a>'
-    })
+  title: '<strong>Oop <u>s</u></strong>',
+  icon: 'error',
+  html:
+  '<pre>' + mat + '</pre>',
+  showCloseButton: false,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonText:'Okay!',
+
+})
+
+
 </script>
 @endif

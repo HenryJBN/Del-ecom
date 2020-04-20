@@ -72,13 +72,15 @@
                                     "_token": "{{ csrf_token() }}",
                                     "id": id
                                     },
+                                    dataType: 'JSON',
                                 success: function (data) {
 
-                                    if (data =="success") {
+                                   
+                                    if (data.success) {
 
                                         swalWithBootstrapButtons.fire(
                                             'Deleted!',
-                                            'Category  has been deleted.',
+                                            data.data,
                                             'success'
                                             )
                                             setInterval(() => {
@@ -88,7 +90,7 @@
                                         } else {
                                         Swal.fire(
                                         'Cancelled',
-                                        'Category Data is safe oooh :)',
+                                        data.data,
                                         'error'
                                     )
                                     }

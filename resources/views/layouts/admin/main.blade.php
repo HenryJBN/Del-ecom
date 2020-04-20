@@ -131,6 +131,8 @@
 
         </div>
         <!-- END wrapper -->
+            <!-- Plugins css -->
+            <link href="{{ asset('plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}}" rel="stylesheet">
 
 
         <!-- jQuery  -->
@@ -142,8 +144,8 @@
           <script src="{{ asset('assets/js/waves.min.js')}}"></script>
 
           <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-
-          <!-- Required datatable js -->
+                    
+                            <!-- Required datatable js -->
         <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
         <!-- Buttons examples -->
@@ -174,6 +176,7 @@
           <!-- Sweet-Alert  -->
         {{-- <script src="{{ asset('plugins/sweet-alert2/sweetalert2.min.js')}}"></script> --}}
         {{-- <script src="{{ asset('assets/pages/sweet-alert.init.js')}}"></script> --}}
+
 
           <!-- App js -->
           <script src="{{ asset('assets/js/app.js')}}"></script>

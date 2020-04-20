@@ -38,6 +38,38 @@
         </li>
 
         <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cart "></i><span> Products <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+                <li><a href="{{ route('admin-prod-creat') }}">Add New Product</a></li>
+                <li><a href="{{ route('admin-prod-index') }}">All Products</a></li>
+                <li><a href="{{ route('admin-prod-draft') }}"> Draft Products</a></li>
+                <li><a href="{{ route('admin-prod-new') }}"> New Products</a></li>
+                <li><a href="{{ route('admin-prod-available') }}"> Available Products</a></li>
+                <li><a href="{{ route('admin-prod-unavailable') }}"> Unavailable Products</a></li>
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-gate-nor"></i><span> Billing <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+
+                <li><a href="{{ route('admin-bill-create') }}">Add Billing</a></li>
+                <li><a href="{{ route('admin-bill-index') }}"> All Billing</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-car-pickup "></i><span> Shipping <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <ul class="submenu">
+
+                <li><a href="{{ route('admin-ship-create') }}">Add Shipping</a></li>
+                <li><a href="{{ route('admin-ship-index') }}"> All Shipping</a></li>
+            </ul>
+        </li>
+
+
+
+        <li>
             <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-email"></i><span> Email <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
             <ul class="submenu">
                 <li><a href="email-inbox.html">Inbox</a></li>
