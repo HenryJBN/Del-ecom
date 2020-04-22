@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-
 class PermissionsSeeder extends Seeder
 {
     /**
@@ -13,7 +12,6 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-
         $permissions = [
             'user-list',
             'user-create',
@@ -40,11 +38,11 @@ class PermissionsSeeder extends Seeder
             'order-edit',
             'order-delete',
             'transaction-list',
-            'invoice-create'
-         ];
+            'invoice-create',
+        ];
 
-         foreach ($permissions as $permission) {
+        foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
-       }
+        }
     }
 }

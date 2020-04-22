@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,50 +14,41 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-
-        $PageTitle = "All Products";
+        $PageTitle = 'All Products';
         $products = Product::orderBy('id', 'desc')->get();
 
         return view('admin.product.index', compact('products', 'PageTitle'));
     }
 
-
     public function draft()
     {
-
-        $PageTitle = "All Draft Products";
+        $PageTitle = 'All Draft Products';
         $products = Product::where('status', 'draft')->orderBy('id', 'desc')->get();
 
         return view('admin.product.index', compact('products', 'PageTitle'));
     }
 
-
     public function available()
     {
-
-        $PageTitle = "All Available Categories";
+        $PageTitle = 'All Available Categories';
         $products = Product::where('status', 'available')->orderBy('id', 'desc')->get();
 
         return view('admin.product.index', compact('products', 'PageTitle'));
     }
 
-
     public function unavailable()
     {
-
-        $PageTitle = "All Unavailable  Products";
+        $PageTitle = 'All Unavailable  Products';
         $products = Product::where('status', 'unavailable')->orderBy('id', 'desc')->get();
 
         return view('admin.product.index', compact('products', 'PageTitle'));
     }
 
-
-    function new () {
-
-        $PageTitle = "All New Products";
+    public function new()
+    {
+        $PageTitle = 'All New Products';
         $products = Product::where('status', 'new')->orderBy('id', 'desc')->get();
 
         return view('admin.product.index', compact('products', 'PageTitle'));
@@ -70,7 +61,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $data['PageTitle'] = "Create Product";
+        $data['PageTitle'] = 'Create Product';
         $data['categories'] = Category::all();
 
         return view('admin.product.create', $data);
@@ -79,26 +70,26 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //--- Validation Section
         $rules = [
-            'sku' => 'min:8|unique:products',
-            'slug' => 'unique:products|regex:/^[a-zA-Z0-9\s-]+$/',
-            'description' => 'required',
-            'category_id' => 'required',
-            'name' => 'required',
-            'price' => 'required',
-            'status' => 'required',
+            'sku'            => 'min:8|unique:products',
+            'slug'           => 'unique:products|regex:/^[a-zA-Z0-9\s-]+$/',
+            'description'    => 'required',
+            'category_id'    => 'required',
+            'name'           => 'required',
+            'price'          => 'required',
+            'status'         => 'required',
             'featured_image' => 'mimes:jpeg,jpg,png,svg',
-
         ];
         $customs = [
             'slug.unique' => 'This slug has already been taken.',
-            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+            'slug.regex'  => 'Slug Must Not Have Any Special Characters.',
         ];
         $validator = Validator::make($request->all(), $rules, $customs);
 
@@ -113,21 +104,21 @@ class ProductController extends Controller
         $featured_image = $request['featured_image'];
 
         $products = Product::Create([
-            'user_id' => auth()->user() ? auth()->user()->id : null,
-            'category_id' => $request->category_id,
-            'sku' => $request->sku,
+            'user_id'        => auth()->user() ? auth()->user()->id : null,
+            'category_id'    => $request->category_id,
+            'sku'            => $request->sku,
             'subcategory_id' => $request->subcategory_id ? $request->subcategory_id : null,
-            'name' => $request->name,
-            'slug' => $request->slug,
-            'description' => $request->description,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'weight' => $request->weight ? $request->weight : null,
-            'status' => $request->status,
-            'color' => $request->color ? $request->color : null,
-            'size' => $request->size ? $request->size : null,
-            'model' => $request->model ? $request->model : null,
-            'brand' => $request->brand ? $request->brand : null,
+            'name'           => $request->name,
+            'slug'           => $request->slug,
+            'description'    => $request->description,
+            'price'          => $request->price,
+            'quantity'       => $request->quantity,
+            'weight'         => $request->weight ? $request->weight : null,
+            'status'         => $request->status,
+            'color'          => $request->color ? $request->color : null,
+            'size'           => $request->size ? $request->size : null,
+            'model'          => $request->model ? $request->model : null,
+            'brand'          => $request->brand ? $request->brand : null,
         ]);
 
         // ADDING IMAGE TO MEDIA TABLE
@@ -139,7 +130,6 @@ class ProductController extends Controller
             $products
                 ->addMedia($file)
                 ->toMediaCollection('products');
-
         }
 
         // dd( $request->file('product_image', []));
@@ -153,27 +143,28 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
+     * @param mixed        $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
         $data['categories'] = Category::all();
         $product = Product::findOrFail($id);
         $data['product'] = $product;
-        $data['PageTitle'] = "Edit " . $product->name;
+        $data['PageTitle'] = 'Edit '.$product->name;
 
         return view('admin.product.edit', $data);
     }
@@ -181,27 +172,28 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Product             $product
+     * @param mixed                    $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //--- Validation Section
         $rules = [
-            'sku' => 'min:8|unique:products,sku,' . $id,
-            'slug' => 'unique:products,slug,' . $id . '|regex:/^[a-zA-Z0-9\s-]+$/',
-            'description' => 'required',
-            'category_id' => 'required',
-            'name' => 'required',
-            'price' => 'required',
-            'status' => 'required',
+            'sku'            => 'min:8|unique:products,sku,'.$id,
+            'slug'           => 'unique:products,slug,'.$id.'|regex:/^[a-zA-Z0-9\s-]+$/',
+            'description'    => 'required',
+            'category_id'    => 'required',
+            'name'           => 'required',
+            'price'          => 'required',
+            'status'         => 'required',
             'featured_image' => 'mimes:jpeg,jpg,png,svg',
-
         ];
         $customs = [
             'slug.unique' => 'This slug has already been taken.',
-            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+            'slug.regex'  => 'Slug Must Not Have Any Special Characters.',
         ];
         $validator = Validator::make($request->all(), $rules, $customs);
 
@@ -246,7 +238,6 @@ class ProductController extends Controller
                 $product
                     ->addMedia($file)
                     ->toMediaCollection('products');
-
             }
         }
 
@@ -257,24 +248,24 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         $product = Product::findOrFail($request->id);
 
-
-       $product->clearMediaCollection('featured_product');
-       $product->clearMediaCollection('products');
-       $product->delete();
+        $product->clearMediaCollection('featured_product');
+        $product->clearMediaCollection('products');
+        $product->delete();
         //--- Redirect Section
 
         $msg = 'Product deleted Successfully !';
-        return response()->json(array(
-            'success' => true,
-            'data'   => $msg
-        ));
 
+        return response()->json([
+            'success' => true,
+            'data'    => $msg,
+        ]);
     }
 }

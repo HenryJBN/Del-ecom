@@ -16,8 +16,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $data['PageTitle'] = "All Categories";
-        $PageTitle = "All SubCategory";
+        $data['PageTitle'] = 'All Categories';
+        $PageTitle = 'All SubCategory';
         $subcategories = SubCategory::orderBy('id', 'desc')->get();
 
         return view('admin.subcategory.index', compact('subcategories', 'PageTitle'));
@@ -30,28 +30,29 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $data['PageTitle'] = "Create SubCategory";
+        $data['PageTitle'] = 'Create SubCategory';
 
         $data['categories'] = Category::all();
+
         return view('admin.subcategory.create', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
         //--- Validation Section
         $rules = [
             'slug' => 'unique:sub_categories|regex:/^[a-zA-Z0-9\s-]+$/',
         ];
         $customs = [
             'slug.unique' => 'This slug has already been taken.',
-            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+            'slug.regex'  => 'Slug Must Not Have Any Special Characters.',
         ];
         $validator = Validator::make($request->all(), $rules, $customs);
 
@@ -65,11 +66,11 @@ class SubCategoryController extends Controller
 
         $subcategory = SubCategory::create([
             'category_id' => $request->category_id,
-            'name' => $request->name,
-            'slug' => Category::str_slug($request->slug),
+            'name'        => $request->name,
+            'slug'        => Category::str_slug($request->slug),
             'description' => $request->description,
         ]);
-// ADDING IMAGE TO MEDIA TABLE
+        // ADDING IMAGE TO MEDIA TABLE
         $subcategory
             ->addMedia($request->upload)
             ->toMediaCollection('subcategory');
@@ -84,24 +85,25 @@ class SubCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param \App\SubCategory $subCategory
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(SubCategory $subCategory)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param \App\SubCategory $subCategory
+     * @param mixed            $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
-        $data['PageTitle'] = "Create SubCategory";
+        $data['PageTitle'] = 'Create SubCategory';
         $data['category'] = Category::all();
         $data['subcategory'] = Subcategory::findOrFail($id);
 
@@ -111,8 +113,10 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SubCategory  $subCategory
+     * @param \Illuminate\Http\Request $request
+     * @param \App\SubCategory         $subCategory
+     * @param mixed                    $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -120,20 +124,17 @@ class SubCategoryController extends Controller
         //--- Validation Section
         $rules = [
             'name' => 'required',
-            'slug' => 'unique:categories,slug,' . $id . '|regex:/^[a-zA-Z0-9\s-]+$/',
+            'slug' => 'unique:categories,slug,'.$id.'|regex:/^[a-zA-Z0-9\s-]+$/',
         ];
         $customs = [
-
             'slug.unique' => 'This slug has already been taken.',
-            'slug.regex' => 'Slug Must Not Have Any Special Characters.',
+            'slug.regex'  => 'Slug Must Not Have Any Special Characters.',
         ];
         $validator = Validator::make($request->all(), $rules, $customs);
 
         if ($validator->fails()) {
-
             return back()
                 ->withErrors($validator)->withInput();
-
         }
         //--- Validation Section Ends
 
@@ -160,31 +161,30 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SubCategory  $subCategory
+     * @param \App\SubCategory $subCategory
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-
         $subcategory = SubCategory::findOrFail($request->id);
         $subcategory->clearMediaCollection('subcategory');
         $subcategory->delete();
         //--- Redirect Section
 
         $msg = 'SubCategory deleted Successfully !';
-        return response()->json(array(
-            'success' => true,
-            'data' => $msg,
-        ));
 
+        return response()->json([
+            'success' => true,
+            'data'    => $msg,
+        ]);
     }
 
     //*** GET Request
     public function load($id)
     {
-    $data['cat'] = SubCategory::where('category_id',$id)->get();
+        $data['cat'] = SubCategory::where('category_id', $id)->get();
         echo json_encode($data);
         //return view('product.subCat', compact('cat'));
     }
-
 }

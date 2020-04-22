@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Category;
-use App\SubCategory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -14,7 +12,7 @@ class Product extends Model implements HasMedia
 
     protected $fillable = ['user_id', 'category_id', 'sku', 'subcategory_id',
         'name', 'slug', 'description', 'price', 'quantity', 'weight', 'status',
-        'color', 'size', 'model', 'brand'];
+        'color', 'size', 'model', 'brand', ];
 
     public function category()
     {
@@ -23,7 +21,6 @@ class Product extends Model implements HasMedia
 
     public function subcategory()
     {
-
         return $this->belongsTo(SubCategory::class);
     }
 
@@ -31,22 +28,20 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections()
     {
         $this->addMediaCollection('featured_product')
-        ->withResponsiveImages()
+            ->withResponsiveImages()
             ->singleFile(); // accept only on file
 
-            $this->addMediaCollection('products')
-        ->withResponsiveImages();
+        $this->addMediaCollection('products')
+            ->withResponsiveImages();
 
         $this->addMediaConversion('thumb')
-        ->width(200)
-        ->height(200)
-        ->sharpen(10);
-        
+            ->width(200)
+            ->height(200)
+            ->sharpen(10);
+
         $this->addMediaConversion('square')
-              ->width(412)
-              ->height(412)
-              ->sharpen(10);
-
+            ->width(412)
+            ->height(412)
+            ->sharpen(10);
     }
-
 }

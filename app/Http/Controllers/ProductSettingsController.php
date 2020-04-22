@@ -14,7 +14,6 @@ class ProductSettingsController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -24,62 +23,61 @@ class ProductSettingsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product_Settings  $product_Settings
+     * @param \App\Product_Settings $product_Settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Product_Settings $product_Settings)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product_Settings  $product_Settings
+     * @param \App\Product_Settings $product_Settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Product_Settings $product_Settings)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product_Settings  $product_Settings
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Product_Settings    $product_Settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product_Settings $product_Settings)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product_Settings  $product_Settings
+     * @param \App\Product_Settings $product_Settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product_Settings $product_Settings)
     {
-        //
     }
 }

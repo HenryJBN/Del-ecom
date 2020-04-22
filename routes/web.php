@@ -19,11 +19,9 @@ Route::get('/', function () {
 Auth::routes();
 // Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
-
     // ************************************ ADMIN SECTION **********************************************
 
     Route::prefix('admin')->group(function () {
-
         //------------ ADMIN SHIPPING SECTION ------------
         Route::get('/shippings', 'ShippingController@index')->name('admin-ship-index');
         Route::get('/shippings/edit/{id}', 'ShippingController@edit')->name('admin-ship-edit');
@@ -33,7 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/shippings/delete', 'ShippingController@destroy')->name('admin-ship-delete');
 
         //------------ ADMIN SHIPPING SECTION ENDS------------
-
 
         //------------ ADMIN BILLING SECTION ------------
         Route::get('/billings', 'BillingController@index')->name('admin-bill-index');
@@ -98,9 +95,7 @@ Route::group(['middleware' => ['auth']], function () {
         // ------------ ROLE SECTION ----------------------
         Route::resource('/roles', 'RoleController');
         // ------------ ROLE SECTION ENDS ----------------------
-
     });
 
-// ************************************ ADMIN SECTION ENDS**********************************************
-
+    // ************************************ ADMIN SECTION ENDS**********************************************
 });
