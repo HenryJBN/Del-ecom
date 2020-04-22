@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //! disable registration
-Auth::routes(['register' => false, 'reset' => false]);
+Auth::routes();
 // Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
