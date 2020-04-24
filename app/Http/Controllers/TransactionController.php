@@ -14,6 +14,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $data['PageTitle'] = "All Transaction";
+
+        return view('admin.trans.index',$data);
     }
 
     /**
