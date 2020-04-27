@@ -181,4 +181,9 @@ class UserController extends Controller
 
         return response('success', 200);
     }
+
+    public function profile()
+    {
+        # code...
+    }
 }

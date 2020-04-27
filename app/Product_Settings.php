@@ -8,8 +8,27 @@ class Product_Settings extends Model
 {
     public $fillable = [
         'cart_vat',
-        'invoice_address'
+        'invoice_address',
+        'metadata'
     ];
+
+    protected $casts = [
+        'metadata' => 'array'
+    ];
+
+    public function setMetadataAttribute($value)
+{
+    $metadata = [];
+
+    foreach ($value as $array_item) {
+        if (!is_null($array_item['key'])) {
+            $metadata[] = $array_item;
+        }
+    }
+
+    $this->attributes['metadata'] = json_encode($metadata);
+}
+
 
     public static function settings(){
         //  $settings=Setting::first();

@@ -2,17 +2,17 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
     public $fillable = [
-        'user_id',
         'transaction_ref',
         'channel',
         'amount',
         'payment_status',
-        'name',
+        'full_name',
         'email_address',
         'phone_number',
         'currency',
@@ -20,4 +20,8 @@ class Transaction extends Model
         'payment_status_description',
     ];
 
+
+    protected $cast =[
+        'transaction_date'=>'date:hh:mm'
+    ];
 }

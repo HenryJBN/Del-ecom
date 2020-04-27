@@ -41,13 +41,13 @@ td{
                 <tr>
                     <th width="45%">{{ __('Total Product') }}</th>
                     <td width="10%">:</td>
-                    <td width="45%">{{ \App\Order::presentPrice($order->total)}}</td>
+                    <td width="45%">{{ \App\Setting::presentPrice($order->total)}}</td>
                 </tr>
 
                 <tr>
                     <th width="45%">{{ __('Total Cost') }}</th>
                     <td width="10%">:</td>
-                    <td width="45%">{{\App\Order::presentPrice($order->total) }}</td>
+                    <td width="45%">{{\App\Setting::presentPrice($order->total) }}</td>
                 </tr>
                 <tr>
                     <th width="45%">{{ __('Ordered Date') }}</th>
@@ -233,21 +233,21 @@ td{
                                 <td>{{ $item->name}}</td>
                                 <td>{{ $item->qty}}</td>
                                 <td>{{ $item->price}}</td>
-                                <td>{{  \App\Order::presentPrice($item->qty * $item->price)}}</td>
+                                <td>{{  \App\Setting::presentPrice($item->qty * $item->price)}}</td>
                             </tr>
                                 @endforeach
 
                                 <tr>
                                     <td colspan="2" class="text-right"><strong>Subtotal</strong></td>
-                                    <td>{{\App\Order::presentPrice($order->subtotal)}}</td>
+                                    <td>{{\App\Setting::presentPrice($order->subtotal)}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right no-border"><strong>VAT Included in Total</strong></td>
-                                    <td>{{ \App\Order::presentPrice($order->total - $order->subtotal)  }}</td>
+                                    <td>{{ \App\Setting::presentPrice($order->total - $order->subtotal)  }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-right no-border"><strong>Total</strong></td>
-                                    <td><strong>{{ \App\Order::presentPrice($order->total)  }}</strong></td>
+                                    <td><strong>{{ \App\Setting::presentPrice($order->total)  }}</strong></td>
                                 </tr>
                         </tbody>
                     </table>

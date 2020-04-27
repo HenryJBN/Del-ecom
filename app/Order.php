@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Billing;
+use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -38,13 +39,7 @@ class Order extends Model
         return $this->belongsTo(\App\Billing::class);
     }
 
-    // add money format
-    public static function presentPrice($price)
-    {
-
-        return '₦'.number_format($price,2 );
-    }
-
+    
 
     //pulling shipping info from other table
     public static function orderShipping($order_id){
@@ -104,6 +99,11 @@ class Order extends Model
     $order =unserialize($order->items);
 
     return $order;
+    }
+
+    public function trans()
+    {
+          return $this->hasOne(Transaction::class, 'email', 'email_address');
     }
 
 }

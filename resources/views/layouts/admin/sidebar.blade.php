@@ -4,13 +4,13 @@
     <ul class="metismenu" id="side-menu">
         <li class="menu-title">Main</li>
         <li>
-            <a href="index.html" class="waves-effect">
+            <a href="{{ route('home') }}" class="waves-effect">
                 <i class="mdi mdi-home"></i><span class="badge badge-primary float-right">3</span> <span> Dashboard </span>
             </a>
         </li>
 
         <li>
-            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-group"></i><span> User <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
+            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-settings-variant "></i><span> Users <span class="float-right menu-arrow"><i class="mdi mdi-plus"></i></span> </span></a>
             <ul class="submenu">
                 <li><a href="{{ route('users.create') }}">Add</a></li>
                 <li><a href="{{ route('users') }}">Staff</a></li>
@@ -98,7 +98,15 @@
         <li class="menu-title">Global Settings</li>
 
         <li>
-            <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cogs "></i><span>Settings <span class="badge badge-warning float-right">NEW</span> </span></a>
+            <a href="{{ route('admin-set-prod-index') }}" class="waves-effect"><i class="mdi mdi-cart-plus "></i><span>Product Settings  </span></a>
+
+        </li>
+        <li>
+            <a href="{{ route('admin-set-gen-index') }}" class="waves-effect"><i class="mdi mdi-cogs "></i><span>General Settings  </span></a>
+
+        </li>
+        <li>
+            <a href="{{ route('admin-set-gen-index') }}" class="waves-effect"><i class="mdi mdi-cogs "></i><span>Profile Settings  </span></a>
 
         </li>
 

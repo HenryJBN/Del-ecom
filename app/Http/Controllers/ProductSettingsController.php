@@ -7,77 +7,28 @@ use Illuminate\Http\Request;
 
 class ProductSettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $data['PageTitle'] = ' Product Setting';
+        $data['settings'] = Product_Settings::orderBy('id', 'desc')->get();
+
+
+        return view('admin.productsetting.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit( $id)
     {
+        $data['PageTitle'] =" Edit Product Setting";
+        $data['setting']=Product_Settings::find($id);
+
+        // dd($data);
+        return view('admin.productsetting.edit',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(Request $request,  $id)
     {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Product_Settings $product_Settings
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product_Settings $product_Settings)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Product_Settings $product_Settings
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product_Settings $product_Settings)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Product_Settings    $product_Settings
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product_Settings $product_Settings)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Product_Settings $product_Settings
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product_Settings $product_Settings)
-    {
+        $setting =Product_Settings::find($id)->update($request->all());
+        return redirect()->route('admin-set-prod-index')
+        ->with('success', 'Product Setting Updated Successfully.');
     }
 }

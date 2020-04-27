@@ -23,6 +23,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->group(function () {
 
+          //----------ADMIN SETTINGS SECTION----------
+
+          Route::get('/profile', 'UserController@profile')->name('admin-profile');
+          Route::get('/product/settings/{id}/edit', 'ProductSettingsController@edit')->name('admin-set-prod-edit');
+          Route::patch('/product/settings/{id}/edit', 'ProductSettingsController@update')->name('admin-set-prod-update');
+          Route::get('/product/settings', 'ProductSettingsController@index')->name('admin-set-prod-index');
+        //   Route::get('/general/settings/create', 'SettingController@create')->name('admin-set-gen-create');
+        //   Route::post('/general/settings/create', 'SettingController@store')->name('admin-set-gen-store');
+          Route::get('/general/settings/{id}/edit', 'SettingController@edit')->name('admin-set-gen-edit');
+          Route::patch('/general/settings/{id}/edit', 'SettingController@update')->name('admin-set-gen-update');
+          Route::get('/general/settings', 'SettingController@index')->name('admin-set-gen-index');
+
+
+            //-----ENDS SETTINGS SECTION----------
+
         //----------ADMIN TRANSACTION SECTION----------
         Route::get('/transactions', 'TransactionController@index')->name('admin-trans-index');
 

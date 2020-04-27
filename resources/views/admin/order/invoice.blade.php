@@ -69,7 +69,7 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <td><strong>Item</strong></td>
+                                                <td><strong>Product Name</strong></td>
                                                 <td class="text-center"><strong>Price</strong></td>
                                                 <td class="text-center"><strong>Quantity</strong>
                                                 </td>
@@ -80,9 +80,9 @@
                                             @foreach ($orderProduct as $item)
                                                     <tr>
                                                         <td>{{ $item->name}}</td>
-                                                        <td class="text-center">{{ \App\Order::presentPrice($item->price)}}</td>
+                                                        <td class="text-center">{{ \App\Setting::presentPrice($item->price)}}</td>
                                                         <td class="text-center">{{ $item->qty}}</td>
-                                                        <td class="text-right">{{  \App\Order::presentPrice($item->qty * $item->price)}}</td>
+                                                        <td class="text-right">{{  \App\Setting::presentPrice($item->qty * $item->price)}}</td>
                                                     </tr>
                                              @endforeach
 
@@ -91,21 +91,21 @@
                                                 <td class="thick-line"></td>
                                                 <td class="thick-line text-center">
                                                     <strong>Subtotal</strong></td>
-                                                <td class="thick-line text-right">{{\App\Order::presentPrice($order->subtotal)}}</td>
+                                                <td class="thick-line text-right">{{\App\Setting::presentPrice($order->subtotal)}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="no-line"></td>
                                                 <td class="no-line"></td>
                                                 <td class="no-line text-center">
                                                     <strong>VAT Included in Total</strong></td>
-                                                <td class="no-line text-right">{{ \App\Order::presentPrice($order->total - $order->subtotal)  }}</td>
+                                                <td class="no-line text-right">{{ \App\Setting::presentPrice($order->total - $order->subtotal)  }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="no-line"></td>
                                                 <td class="no-line"></td>
                                                 <td class="no-line text-center">
                                                     <strong>Total</strong></td>
-                                                <td class="no-line text-right"><h4 class="m-0">{{ \App\Order::presentPrice($order->total)  }}</h4></td>
+                                                <td class="no-line text-right"><h4 class="m-0">{{ \App\Setting::presentPrice($order->total)  }}</h4></td>
                                             </tr>
                                             </tbody>
                                         </table>

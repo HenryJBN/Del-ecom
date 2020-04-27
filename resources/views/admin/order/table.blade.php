@@ -52,7 +52,7 @@
 
           </td>
         <td>{{$order->order_code}}</td>
-        {{-- <td>{{ \App\Order::presentPrice($order->total)}}</td> --}}
+        {{-- <td>{{ \App\Setting::presentPrice($order->total)}}</td> --}}
         <td>{{$order->created_at->format('j F, Y')}}</td>
         <td>
 

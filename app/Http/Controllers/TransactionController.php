@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -15,7 +16,13 @@ class TransactionController extends Controller
     public function index()
     {
         $data['PageTitle'] = "All Transaction";
+        $data['trans']= Transaction::orderby('created_at','desc')->get();
+        $data['trans']= DB::table('transactions')
+         ->leftJoin('users','transactions.email_address','=','users.email')
+         ->orderby('transactions.transaction_date','desc')->get();
 
+
+        //  dd($data['trans']);
         return view('admin.trans.index',$data);
     }
 
