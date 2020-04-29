@@ -164,7 +164,7 @@
                    <hr class="py-3">
                   <div class="form-group">
                    <strong>Email:</strong>
-                   {!! Form::email('email', Auth::user()->email, array('placeholder' => 'email','class' => 'form-control','required','readonly')) !!}
+                   {!! Form::email('email', Auth::user()->email, array('placeholder' => 'email','class' => 'form-control','required','')) !!}
                </div>
 
                    <hr class="py-3">
