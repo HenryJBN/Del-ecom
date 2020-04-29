@@ -1,8 +1,11 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+// font awesome
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import "ui.css";
+@import "responsive.css";
