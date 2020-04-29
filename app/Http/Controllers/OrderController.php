@@ -6,8 +6,10 @@ use App\User;
 use App\Order;
 use App\Billing;
 use App\Shipping;
+use App\Mail\OrderPlaced;
 use App\Product_Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Validator;
 
@@ -135,6 +137,9 @@ class OrderController extends Controller
             'billing_info' => $billing_info,
         ]);
 
+        //sendMail
+        // Mail::send(new OrderPlaced($order));
+        Mail::to($request->email)->send(new OrderPlaced($order));
         Cart::destroy();
 
         return redirect()->route('admin-order-index')
@@ -161,8 +166,8 @@ class OrderController extends Controller
 
         $data['PageTitle'] = "Edit  Order " . $data['order']->order_code;
 
-        $order = Order::find($id);
-        $orderProduct =Order::orderProduct($order->id ) ;
+        // $order = Order::find($id);
+        // $orderProduct =Order::orderProduct($order->id ) ;
 
         return view('admin.order.show',$data);
 
@@ -439,7 +444,7 @@ class OrderController extends Controller
             $track->user_id = User::username($track->user_id);
         $track->show = route('admin-order-show', ['id' => $track->id]);
         $track->print = route('admin-order-invoice', ['id' => $track->id]);
-        
+
         return $track;
     }
 

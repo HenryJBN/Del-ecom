@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -22,12 +23,12 @@ class UserController extends Controller
     {
         $data['PageTitle'] = 'All Staff';
         $data['type'] = 'admin';
-        $data['users'] = User::where('type', '!=', 'customer')->get();
+        $data['users'] = User::where('type', '!=', 'customer')->orderby('created_at','desc')->get();
 
         if ($type == 'customer') {
             $data['PageTitle'] = 'All Customer';
             $data['type'] = 'customer';
-            $data['users'] = User::where('type', 'customer')->get();
+            $data['users'] = User::where('type', 'customer')->orderby('created_at','desc')->get();
         }
 
         return view('admin.user.index', $data);
@@ -57,12 +58,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), [
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users,email',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|same:confirm-password',
-            'roles'    => 'required',
+            'roles' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -75,27 +75,16 @@ class UserController extends Controller
 
         // $user = User::create($input);
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => $password,
-            'type'     => $request->roles[0],
+            'type' => $request->roles[0],
         ]);
 
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users')
             ->with('success', 'User created successfully');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\User $user
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
     }
 
     /**
@@ -113,7 +102,7 @@ class UserController extends Controller
         // dd($data['roles']);
         $data['userRole'] = $user->roles->pluck('name', 'name')->all();
         $data['user'] = $user;
-        $data['PageTitle'] = 'Edit '.$user->name;
+        $data['PageTitle'] = 'Edit ' . $user->name;
 
         return view('admin.user.edit', $data);
     }
@@ -130,10 +119,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users,email,'.$id,
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-            'roles'    => 'required',
+            'roles' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -158,7 +147,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect('admin/users/'.strtolower($input['roles'][0]))
+        return redirect('admin/users/' . strtolower($input['roles'][0]))
             ->with('success', 'User updated successfully');
     }
 
@@ -182,8 +171,42 @@ class UserController extends Controller
         return response('success', 200);
     }
 
-    public function profile()
+    //set profile
+    public function profile($id)
     {
-        # code...
+
+ $data['user'] = User::where('id', $id)->first();
+
+
+
+        $data['PageTitle'] = 'Profile Information';
+
+        $data['trans_PageTitle'] = "All Transaction";
+        $data['trans'] = DB::table('transactions')
+            ->leftJoin('users', 'transactions.email_address', '=', 'users.email')
+            ->where('users.email', $data['user']->email)
+            ->orderby('transactions.transaction_date', 'desc')->get();
+
+        // dd($data['trans']);
+        //get all orders from a users
+        $data['orders_PageTitle'] = "All Orders";
+        $data['orders'] = Order::where('user_id', $data['user']->id)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.user.profile', $data);
+    }
+
+    //set profile image
+    public function profileLogo(Request $request, $id )
+    {
+
+            $user = User::where('id', $id)->first();
+
+
+        $user
+            ->addMedia($request->profile_logo)
+            ->toMediaCollection('profile_logo');
+
+        return redirect()->route('admin-user-profile', $id)
+            ->with('success', 'Site logo Updated Successfully.');
     }
 }

@@ -232,7 +232,7 @@ td{
 
                                 <td>{{ $item->name}}</td>
                                 <td>{{ $item->qty}}</td>
-                                <td>{{ $item->price}}</td>
+                                <td>{{ \App\Setting::presentPrice($item->price)}}</td>
                                 <td>{{  \App\Setting::presentPrice($item->qty * $item->price)}}</td>
                             </tr>
                                 @endforeach

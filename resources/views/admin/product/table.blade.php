@@ -31,7 +31,7 @@
             @endif
 
         </td>
-        <td>{{ '₦'.$product->price   }}</td>
+        <td>{{ \App\Setting::presentPrice($product->price)   }}</td>
         <td>{{$product->quantity}}</td>
         <td>
             @if ($product->status == "draft")

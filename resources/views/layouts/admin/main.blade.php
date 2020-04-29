@@ -11,7 +11,7 @@
           <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico')}}">
+        <link rel="shortcut icon" type="image/png" href="{{\App\Setting::logo('site_logo','icon')}}">
          <!-- Sweet Alert -->
          {{-- <link href="{{ asset('plugins/sweet-alert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css"> --}}
          {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> --}}
@@ -45,10 +45,11 @@
                 <div class="topbar-left">
                     <a href="index.html" class="logo">
                         <span>
-                            <img src="{{ asset('assets/images/logo.png')}}" alt="" height="24">
+                        <img src="{{\App\Setting::logo('site_logo','smallest')}}" alt="" >
                         </span>
                         <i>
-                            <img src="{{ asset('assets/images/logo-sm.png')}}" alt="" height="22">
+                            <img src="{{\App\Setting::logo('site_logo','icon')}}" alt="" >
+                            {{-- <img src="{{ asset('assets/images/logo-sm.png')}}" alt="" height="22"> --}}
                         </i>
                     </a>
                 </div>
@@ -118,7 +119,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer">
-                    © 2020 Del-York <span class="d-none d-sm-inline-block">- Crafted with <i class="mdi mdi-heart text-danger"></i> by Donsoft.</span>
+                    © {{date('Y')}}  {{ \App\Setting::siteInfo()->get('site_title')}} <span class="d-none d-sm-inline-block">- Crafted with <i class="mdi mdi-heart text-danger"></i> by Donsoft.</span>
                 </footer>
 
             </div>
@@ -144,7 +145,7 @@
           <script src="{{ asset('assets/js/waves.min.js')}}"></script>
 
           <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-                    
+
                             <!-- Required datatable js -->
         <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
