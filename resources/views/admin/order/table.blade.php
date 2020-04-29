@@ -10,7 +10,7 @@
         <th>Order Code</th>
         {{-- <th>Total</th> --}}
         <th>Created At</th>
-        <th width="280px">Action</th>
+       <th width="280px">Action</th>
 
     </tr>
     </thead>
@@ -57,6 +57,9 @@
         <td>
 
             <a class="btn btn-success" href="{{ route('admin-order-show',$order['id']) }}">Details</a>
+
+            @if( Route::currentRouteName() !== 'admin-user-profile')
+
             <a class="btn btn-warning" href="{{ route('admin-order-invoice',$order['id']) }}">Invoice</a>
             @can('order-edit')
                 <a class="btn btn-primary" href="{{ route('admin-order-edit',$order['id']) }}">Edit</a>
@@ -66,6 +69,7 @@
 
             @endcan
 
+            @endif
         </td>
 
     </tr>

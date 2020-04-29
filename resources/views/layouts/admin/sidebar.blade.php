@@ -106,7 +106,7 @@
 
         </li>
         <li>
-            <a href="{{ route('admin-set-gen-index') }}" class="waves-effect"><i class="mdi mdi-cogs "></i><span>Profile Settings  </span></a>
+            <a href="{{ route('admin-user-profile',auth()->user()->id) }}" class="waves-effect"><i class="mdi mdi-cogs "></i><span>Profile Settings  </span></a>
 
         </li>
 

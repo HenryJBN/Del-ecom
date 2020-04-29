@@ -11,7 +11,7 @@ Register
     <div class="card-body">
 
         <h3 class="text-center m-0">
-            <a href="index.html" class="logo logo-admin"><img src="assets/images/logo.png" height="30" alt="logo"></a>
+            <a href="index.html" class="logo logo-admin"><img src="{{\App\Setting::logo('site_logo','small')}}"  alt="logo"></a>
         </h3>
 
         <div class="p-3">

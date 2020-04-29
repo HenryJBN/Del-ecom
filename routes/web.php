@@ -23,9 +23,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->group(function () {
 
+
+        //---------DASHBOARD  SECTION ----/
+        Route::get('/dashboard', 'HomeController@index')->name('home');
+        //--------END OF DASHBOARD SECTION----------
           //----------ADMIN SETTINGS SECTION----------
 
-          Route::get('/profile', 'UserController@profile')->name('admin-profile');
           Route::get('/product/settings/{id}/edit', 'ProductSettingsController@edit')->name('admin-set-prod-edit');
           Route::patch('/product/settings/{id}/edit', 'ProductSettingsController@update')->name('admin-set-prod-update');
           Route::get('/product/settings', 'ProductSettingsController@index')->name('admin-set-prod-index');
@@ -34,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
           Route::get('/general/settings/{id}/edit', 'SettingController@edit')->name('admin-set-gen-edit');
           Route::patch('/general/settings/{id}/edit', 'SettingController@update')->name('admin-set-gen-update');
           Route::get('/general/settings', 'SettingController@index')->name('admin-set-gen-index');
+          Route::post('/general/settings', 'SettingController@siteLogo')->name('admin-set-gen-logo');
 
 
             //-----ENDS SETTINGS SECTION----------
@@ -124,13 +128,13 @@ Route::group(['middleware' => ['auth']], function () {
 
         //------------ ADMIN CATEGORY SECTION ENDS------------
 
-        Route::get('/dashboard', 'HomeController@index')->name('home');
+
 
         // ------------ Users Management SECTION----------------------
-
+        Route::get('/user/profile/{id}', 'UserController@profile')->name('admin-user-profile');
+        Route::PATCH('/user/profile/{id}', 'UserController@profileLogo')->name('admin-user-profile-update');
         Route::get('/users/{type?}', 'UserController@index')->name('users');
         Route::get('/create/user', 'UserController@create')->name('users.create');
-        Route::get('/users/{user}', 'UserController@show')->name('users.show');
         Route::post('/users', 'UserController@store')->name('users.store');
         Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
         Route::PATCH('/users/{user}', 'UserController@update')->name('users.update');

@@ -9,7 +9,7 @@
     "use strict";
 
     var Dashboard = function() {};
-    
+
     //creates area chart
     Dashboard.prototype.createAreaChart = function (element, pointSize, lineWidth, data, xkey, ykeys, labels, lineColors) {
         Morris.Area({
@@ -49,10 +49,10 @@
             $(this).peity("donut", $(this).data());
         });
 
-  
-    
+
+
     Dashboard.prototype.init = function() {
-        
+
         //creating area chart
         var $areaData = [
             {y: '2011', a: 0, b: 0, c:0},
@@ -78,7 +78,7 @@
     $.Dashboard = new Dashboard, $.Dashboard.Constructor = Dashboard
 }(window.jQuery),
 
-//initializing 
+//initializing
 function($) {
     "use strict";
     $.Dashboard.init();

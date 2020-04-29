@@ -16,7 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         $data['PageTitle'] = "All Transaction";
-        $data['trans']= Transaction::orderby('created_at','desc')->get();
+        // $data['trans']= Transaction::orderby('created_at','desc')->get();
         $data['trans']= DB::table('transactions')
          ->leftJoin('users','transactions.email_address','=','users.email')
          ->orderby('transactions.transaction_date','desc')->get();
