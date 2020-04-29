@@ -138,7 +138,7 @@
                          <!-- Uploaded image area-->
                          <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
                         <div class="image-area mt-4"><img id="imageResult" name="imageResult"
-                            src="{{$setting->getFirstMediaUrl('site_logo')}}" style="width:20%; margin-top:10px;" alt="" height="20" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                            src="{{\App\Setting::logo('site_logo','small')}}" style="width:20%; margin-top:10px;" alt="" height="20" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
 
                      </div>
 
@@ -147,7 +147,7 @@
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">
                                     Update Site Logo
                                 </button>
-                                
+
                             </div>
                         </div>
 
