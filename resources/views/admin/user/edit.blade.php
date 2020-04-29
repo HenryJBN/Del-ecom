@@ -57,7 +57,7 @@
                     <div class="form-group ">
                         <label class="control-label">Single Select</label>
                         <strong>Role:</strong>
-                        {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','')) !!}
+                        {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','')) !!}
                     </div>
 
                     <div style="margin-bottom:100px">

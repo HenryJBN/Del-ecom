@@ -19,12 +19,13 @@ class CreateTransactionsTable extends Migration
             $table->string('channel');
             $table->double('amount');
             $table->string('payment_status', 100);
-            $table->string('name', 150);
+            $table->string('full_name', 150);
             $table->string('email_address', 40);
             $table->string('phone_number', 15);
             $table->string('currency', 100);
             $table->string('merchant_transaction_ref', 12);
             $table->string('payment_status_description', 255);
+            $table->timestamp('transaction_date');
             $table->timestamps();
         });
     }

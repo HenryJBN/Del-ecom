@@ -14,13 +14,14 @@
                 <div class="card m-b-20">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">{{$PageTitle}}</h4>
-                        <p class="text-muted m-b-30">
-                           Click on the button below to export your data table
-                        </p>
+                       <h4 class="mt-2 header-title">{{$PageTitle}}</h4>
 
+                       <div class="row col-md-12 py-4 mt-2">
+                        <a  href="{{ route('roles.create') }}" class=" header-title mt-2 fa-pull-right btn btn-primary waves-effect waves-light text-white m-t-10" >Create New Role</a>
 
-                          <a  href="{{ route('roles.create') }}" class="fa-pull-right btn btn-primary waves-effect waves-light text-white" >Create New Role</a>
+                       </div>
+                        {{-- <a  href="{{ route('roles.create') }}" class=" header-title mt-2 fa-pull-right btn btn-primary waves-effect waves-light text-white m-t-10" >Create New Role</a> --}}
+
 
                         @include('admin.role.table')
 
@@ -34,4 +35,3 @@
 </div> <!-- container-fluid -->
  @endsection
 
- 

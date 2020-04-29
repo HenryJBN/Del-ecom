@@ -56,6 +56,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
             'name'     => 'required',
             'email'    => 'required|email|unique:users,email',
@@ -67,15 +69,16 @@ class UserController extends Controller
             return back()
                 ->withErrors($validator)->withInput();
         }
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+
+        // dd($request->roles[0]);
+        $password = Hash::make($request->password);
 
         // $user = User::create($input);
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'password' => $input['password'],
-            'type'     => $input['roles'][0],
+            'password' => $password,
+            'type'     => $request->roles[0],
         ]);
 
         $user->assignRole($request->input('roles'));
@@ -107,6 +110,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $data['roles'] = Role::pluck('name', 'name')->all();
+        // dd($data['roles']);
         $data['userRole'] = $user->roles->pluck('name', 'name')->all();
         $data['user'] = $user;
         $data['PageTitle'] = 'Edit '.$user->name;
@@ -176,5 +180,10 @@ class UserController extends Controller
         $user->delete($request->id);
 
         return response('success', 200);
+    }
+
+    public function profile()
+    {
+        # code...
     }
 }

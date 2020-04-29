@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProductSettingsTable extends Migration
 {
@@ -15,9 +15,9 @@ class CreateProductSettingsTable extends Migration
     {
         Schema::create('product__settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->json('metadata');
+            $table->string('cart_vat');
+            $table->string('invoice_address');
             $table->timestamps();
         });
     }

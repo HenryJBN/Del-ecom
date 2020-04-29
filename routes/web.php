@@ -22,6 +22,54 @@ Route::group(['middleware' => ['auth']], function () {
     // ************************************ ADMIN SECTION **********************************************
 
     Route::prefix('admin')->group(function () {
+
+          //----------ADMIN SETTINGS SECTION----------
+
+          Route::get('/profile', 'UserController@profile')->name('admin-profile');
+          Route::get('/product/settings/{id}/edit', 'ProductSettingsController@edit')->name('admin-set-prod-edit');
+          Route::patch('/product/settings/{id}/edit', 'ProductSettingsController@update')->name('admin-set-prod-update');
+          Route::get('/product/settings', 'ProductSettingsController@index')->name('admin-set-prod-index');
+        //   Route::get('/general/settings/create', 'SettingController@create')->name('admin-set-gen-create');
+        //   Route::post('/general/settings/create', 'SettingController@store')->name('admin-set-gen-store');
+          Route::get('/general/settings/{id}/edit', 'SettingController@edit')->name('admin-set-gen-edit');
+          Route::patch('/general/settings/{id}/edit', 'SettingController@update')->name('admin-set-gen-update');
+          Route::get('/general/settings', 'SettingController@index')->name('admin-set-gen-index');
+
+
+            //-----ENDS SETTINGS SECTION----------
+
+        //----------ADMIN TRANSACTION SECTION----------
+        Route::get('/transactions', 'TransactionController@index')->name('admin-trans-index');
+
+        //-----ENDS TRANSACTION SECTION----------
+
+//------------ ADMIN ORDERS SECTION ------------
+        Route::get('/orders', 'OrderController@index')->name('admin-order-index');
+        Route::get('/orders/create', 'OrderController@create')->name('admin-order-create');
+        Route::post('/orders/create', 'OrderController@store')->name('admin-order-store');
+        Route::get('/order/edit/{id}', 'OrderController@edit')->name('admin-order-edit');
+        Route::patch('/order/update/{id}', 'OrderController@update')->name('admin-order-update');
+
+        Route::get('/orders/new', 'OrderController@new')->name('admin-order-new');
+        Route::get('/orders/shipped', 'OrderController@shipped')->name('admin-order-shipped');
+        Route::get('/orders/returned', 'OrderController@returned')->name('admin-order-returned');
+        Route::get('/orders/cancelled', 'OrderController@cancelled')->name('admin-order-cancelled');
+        Route::get('/orders/delivered', 'OrderController@delivered')->name('admin-order-delivered');
+        Route::post('/order/delete', 'OrderController@destroy')->name('admin-order-delete');
+
+        Route::get('/orders/addTocart', 'OrderController@add_cart')->name('admin.order.cart');
+        Route::get('/orders/loadShipping/{id}', 'OrderController@loadShipping')->name('admin.order.loadshipping');
+        Route::get('/orders/loadBilling/{id}', 'OrderController@loadBilling')->name('admin.order.loadbilling');
+
+        Route::get('/order/tracking/search/{order_code}', 'OrderController@tracking')->name('admin-track-tracking');
+        Route::get('/order/tracking', 'OrderController@track')->name('admin-order-track');
+        Route::get('/order/tracking/{id}/show/', 'OrderController@show')->name('admin-order-show');
+
+        Route::get('/order/{id}/invoice', 'OrderController@invoice')->name('admin-order-invoice');
+
+
+//------------ ADMIN ORDERS SECTION ENDS------------
+
         //------------ ADMIN SHIPPING SECTION ------------
         Route::get('/shippings', 'ShippingController@index')->name('admin-ship-index');
         Route::get('/shippings/edit/{id}', 'ShippingController@edit')->name('admin-ship-edit');

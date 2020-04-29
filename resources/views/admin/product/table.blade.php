@@ -25,7 +25,12 @@
         <td>{{ ++$i }}</td>
         <td>{{ $product->name }}</td>
         <td>{{$product->category->name}}</td>
-        <td>{{ $product->subcategory->name }}</td>
+        <td>
+            @if ( $product->subcategory_id != null)
+            {{ $product->subcategory->name }}
+            @endif
+
+        </td>
         <td>{{ '₦'.$product->price   }}</td>
         <td>{{$product->quantity}}</td>
         <td>

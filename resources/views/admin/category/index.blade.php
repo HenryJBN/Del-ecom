@@ -91,7 +91,7 @@
                                             )
                                             setInterval(() => {
                                                 location.reload(true);//this will release the event
-                                            }, 3000);
+                                            }, 1000);
 
                                         } else {
                                         Swal.fire(

@@ -92,10 +92,10 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Products</a>
-                    <a class="dropdown-item" href="#">Orders</a>
+                    <a class="dropdown-item" href="{{ route('admin-prod-creat') }}">Products</a>
+                    {{-- <a class="dropdown-item" href="#">Orders</a> --}}
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    {{-- <a class="dropdown-item" href="#">Logout</a> --}}
                 </div>
             </div>
         </li>
