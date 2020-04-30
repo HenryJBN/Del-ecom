@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                    <form action="#" class="search">
+                    <form action="{{ route('search') }}" class="search">
                         <div class="input-group w-100">
                             <input type="text" class="form-control" placeholder="Search">
                             <div class="input-group-append">
@@ -25,7 +25,7 @@
                 <div class="col-lg-4 col-sm-6 col-12">
                     <div class="widgets-wrap float-md-right">
                         <div class="widget-header mr-3">
-                            <a href="#" class="icon icon-sm rounded-circle border">
+                            <a href="{{ route('cart') }}" class="icon icon-sm rounded-circle border">
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
                             <span class="badge badge-pill badge-danger notify">0</span>
@@ -37,8 +37,8 @@
                             <div class="text">
                                 <span class="text-muted">Welcome!</span>
                                 <div>
-                                    <a href="#">Sign in</a> |
-                                    <a href="#"> Register</a>
+                                    <a href="{{ route('login') }}">Sign in</a> |
+                                    <a href="{{ route('register') }}"> Register</a>
                                 </div>
                             </div>
                         </div>

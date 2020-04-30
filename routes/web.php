@@ -11,7 +11,11 @@
 |
  */
 
-Route::view('/', 'welcome')->name('index');
+Route::view('/', 'store.index')->name('index');
+Route::view('product-detail', 'store.detail')->name('productDetail');
+Route::view('search', 'store.search')->name('search');
+Route::view('shopping-cart', 'store.cart')->name('cart');
+Route::view('category', 'store.category')->name('cartegory');
 
 Auth::routes();
 
