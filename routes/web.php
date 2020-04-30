@@ -70,8 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/order/{id}/invoice', 'OrderController@invoice')->name('admin-order-invoice');
 
-
-//------------ ADMIN ORDERS SECTION ENDS------------
+        //------------ ADMIN ORDERS SECTION ENDS------------
 
         //------------ ADMIN SHIPPING SECTION ------------
         Route::get('/shippings', 'ShippingController@index')->name('admin-ship-index');
@@ -130,7 +129,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard', 'HomeController@index')->name('home');
 
         // ------------ Users Management SECTION----------------------
-
+        Route::get('/user/profile/{id}', 'UserController@profile')->name('admin-user-profile');
+        Route::PATCH('/user/profile/{id}', 'UserController@profileLogo')->name('admin-user-profile-update');
         Route::get('/users/{type?}', 'UserController@index')->name('users');
         Route::get('/create/user', 'UserController@create')->name('users.create');
         Route::get('/users/{user}', 'UserController@show')->name('users.show');
