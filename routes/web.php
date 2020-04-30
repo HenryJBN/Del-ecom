@@ -11,7 +11,8 @@
 |
  */
 
-Route::view('/', 'welcome')->name('index');
+Route::view('/', 'store.index')->name('index');
+Route::view('product-detail', 'store.detail')->name('productDetail');
 
 Auth::routes();
 
