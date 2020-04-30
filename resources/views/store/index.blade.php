@@ -64,7 +64,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/1.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -84,7 +84,7 @@
                 <!-- col.// -->
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/2.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -103,7 +103,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/3.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -122,7 +122,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/4.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -160,7 +160,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/5.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -181,7 +181,7 @@
                 <div class="col-md-3">
                     <div class="card card-product-grid">
 
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/6.jpg') }}" alt="product image">
                         </a>
 
@@ -203,7 +203,7 @@
                 <!-- col.// -->
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/7.jpg') }}" alt="product image">
                         </a>
 
@@ -224,7 +224,7 @@
                 <!-- col.// -->
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/9.jpg') }}" alt="product image">
                         </a>
 
@@ -262,7 +262,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/10.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -283,7 +283,7 @@
                 <!-- col.// -->
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/12-1.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -304,7 +304,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/11.jpg') }}" alt="product image">
                         </a>
                         <div class="card-body p-3">
@@ -325,7 +325,7 @@
 
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="#" class="img-wrap">
+                        <a href="{{ route('productDetail') }}" class="img-wrap">
                             <img src="{{ asset('images/items/8.jpg') }}" alt="product image">
                         </a>
 
